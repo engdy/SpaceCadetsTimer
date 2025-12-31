@@ -1,0 +1,31 @@
+<resources>
+    <string name="app_name">Space Cadets Timer</string>
+
+    <!-- Global -->
+    <string name="button_ok">OK</string>
+    <string name="button_yes">Yes</string>
+    <string name="button_no">No</string>
+    <string name="button_3_4">3,4</string>
+    <string name="button_5">5+</string>
+    <string name="button_next">Next</string>
+    <string name="button_prev">Previous</string>
+    <string name="button_reset">Reset</string>
+    <string name="button_start">Start</string>
+    <string name="button_restart">Restart</string>
+    <string name="button_pause">Pause</string>
+    <string name="not_timed">Not Timed</string>
+
+    <!-- Configuration -->
+    <string name="configuration">Configuration</string>
+    <string name="how_many_players">How many players?</string>
+    <string name="using_science">Using SCIENCE* STATION?</string>
+    <string name="science_expansion">*from the Resistance is Mostly Futile expansion</string>
+
+    <!-- Nemesis Start -->
+    <string name="select_starting_point">Select the starting point for the Nemesis Marker:</string>
+    <string name="update_nemesis">Update the Nemesis Marker</string>
+    <string name="view_tutorials">View Tutorials</string>
+
+    <!-- Discuss Phase -->
+    <string name="button_comm_breakdown">Comm Breakdown</string>
+</resources>
