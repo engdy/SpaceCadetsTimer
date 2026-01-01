@@ -7,6 +7,7 @@
     <string name="button_no">No</string>
     <string name="button_3_4">3,4</string>
     <string name="button_5">5+</string>
+    <string name="button_back">Back</string>
     <string name="button_next">Next</string>
     <string name="button_prev">Previous</string>
     <string name="button_reset">Reset</string>
@@ -25,6 +26,18 @@
     <string name="select_starting_point">Select the starting point for the Nemesis Marker:</string>
     <string name="update_nemesis">Update the Nemesis Marker</string>
     <string name="view_tutorials">View Tutorials</string>
+
+    <!-- Tutorials -->
+    <string name="tutorials_title">Tutorials</string>
+    <string name="tut_captain">Captain</string>
+    <string name="tut_engineering">Engineering</string>
+    <string name="tut_helm">Helm</string>
+    <string name="tut_sensors">Sensors</string>
+    <string name="tut_weapons">Weapons</string>
+    <string name="tut_shields">Shields</string>
+    <string name="tut_tractor">Tractor Beams</string>
+    <string name="tut_jump">Jump Drive</string>
+    <string name="tut_damage">Damage Control"</string>
 
     <!-- Discuss Phase -->
     <string name="button_comm_breakdown">Comm Breakdown</string>

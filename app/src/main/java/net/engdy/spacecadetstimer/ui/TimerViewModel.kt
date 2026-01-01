@@ -16,7 +16,7 @@ import net.engdy.spacecadetstimer.SHGTimer
 class TimerViewModel(
     duration: Long,
     val finalTickingDuration: Long = TEN_SECONDS_IN_MILLIS,
-    val context: Context
+    context: Context
 ) : ViewModel() {
     private var originalDuration = duration
     private val _uiState = MutableStateFlow(TimerUIState(secondsLeft = (duration / 1_000L).toInt()))
@@ -145,7 +145,9 @@ class TimerViewModel(
                 phase = Phase.CONFIG,
                 isRunning = false,
                 isEnded = false,
-                isFinalTicking = false
+                isFinalTicking = false,
+                isCommBreakdown = false,
+                nemesis = -1
             )
         }
     }

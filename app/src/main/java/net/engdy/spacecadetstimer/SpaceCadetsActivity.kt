@@ -126,7 +126,10 @@ fun SpaceCadets(
         modifier = Modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.End
     ) {
-        val buttonsEnabled = timerUiState.phase != Phase.CONFIG && timerUiState.phase != Phase.NEMESIS_START
+        val buttonsEnabled =
+            timerUiState.phase != Phase.CONFIG
+                    && timerUiState.phase != Phase.NEMESIS_START
+                    && timerUiState.phase != Phase.TUTORIALS
         Button(
             enabled = buttonsEnabled,
             onClick = {
