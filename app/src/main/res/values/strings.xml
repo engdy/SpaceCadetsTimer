@@ -29,6 +29,7 @@
     <string name="using_science">Using SCIENCE* STATION?</string>
     <string name="science_expansion">*from the Resistance is Mostly Futile expansion</string>
     <string name="play_background">Play background music?</string>
+    <string name="button_readme">Readme</string>
 
     <!-- Nemesis -->
     <string name="select_starting_point">Select the starting point for the Nemesis Marker:</string>
@@ -81,4 +82,14 @@
     <!-- Jump -->
     <string name="button_add_30">+30 sec</string>
     <string name="cd_jump">Jump phase</string>
+
+    <!-- Readme -->
+    <string name="button_close">Close</string>
+    <string name="readme_title">Space Cadets Timer v1.0.0</string>
+    <string name="readme_para">This helper app for the Space Cadets boardgame has been developed
+    from the original app published by Stronghold Games in 2013, but has been updated for modern
+    Android devices. Space Cadets is a trademark of Stronghold Games. This app is an unofficial
+    fan-made tool and is not affiliated with, endorsed by, or sponsored by Stronghold Games.
+    Sound effects are sourced from Freesound.org under Creative Commons.\n
+    Developed by Andy Foulke (engdy@bgg)</string>
 </resources>

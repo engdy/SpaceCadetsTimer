@@ -21,5 +21,6 @@ enum class Phase(val img: Int, val duration: Long) {
     FIRE_WEAPONS_6(R.drawable.sc_step_6, 30_000L),
     ENEMY_NEMESIS_7(R.drawable.sc_step_7, 0L),
     JUMP_8(R.drawable.sc_step_8, 30_000L),
-    REPAIR_9(R.drawable.sc_step_9, 30_000L)
+    REPAIR_9(R.drawable.sc_step_9, 30_000L),
+    README(0, 0)
 }

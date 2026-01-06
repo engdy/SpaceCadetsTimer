@@ -7,6 +7,7 @@ package net.engdy.spacecadetstimer.ui
  */
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -133,5 +134,22 @@ fun Configure(
             text = stringResource(R.string.science_expansion),
             style = MaterialTheme.typography.bodyMedium
         )
+    }
+
+    Box(modifier = Modifier.fillMaxSize()) {
+        Button(
+            shape = MaterialTheme.shapes.small,
+            onClick = {
+                timerViewModel.setPhase(Phase.README)
+            },
+            modifier = Modifier
+                .align(Alignment.BottomStart)
+                .padding(20.dp)
+        ) {
+            Text(
+                text = stringResource(R.string.button_readme),
+                style = MaterialTheme.typography.titleSmall
+            )
+        }
     }
 }

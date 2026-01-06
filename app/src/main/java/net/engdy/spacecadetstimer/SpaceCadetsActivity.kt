@@ -50,6 +50,7 @@ import net.engdy.spacecadetstimer.ui.Configure
 import net.engdy.spacecadetstimer.ui.Discuss
 import net.engdy.spacecadetstimer.ui.Nemesis
 import net.engdy.spacecadetstimer.ui.NotTimed
+import net.engdy.spacecadetstimer.ui.Readme
 import net.engdy.spacecadetstimer.ui.Timer30
 import net.engdy.spacecadetstimer.ui.TimerViewModel
 import net.engdy.spacecadetstimer.ui.Tutorials
@@ -219,6 +220,9 @@ fun SpaceCadets(
         Phase.JUMP_8,
         Phase.REPAIR_9 -> {
             Timer30(timerViewModel)
+        }
+        Phase.README -> {
+            Readme(timerViewModel)
         }
     }
 }
