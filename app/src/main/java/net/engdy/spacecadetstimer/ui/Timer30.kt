@@ -92,17 +92,7 @@ fun Timer30(
     Box(
         modifier = Modifier.fillMaxSize()
     ) {
-        val imgId = when (timerUIState.phase) {
-            Phase.ACTION_3 -> R.drawable.sc_step_3
-            Phase.ACTION_3A -> R.drawable.sc_step_3a
-            Phase.ACTION_3B -> R.drawable.sc_step_3b
-            Phase.SCIENCE_1_2 -> R.drawable.sc_step_1_2
-            Phase.TRACTOR_BEAM_5 -> R.drawable.sc_step_5
-            Phase.FIRE_WEAPONS_6 -> R.drawable.sc_step_6
-            Phase.JUMP_8 -> R.drawable.sc_step_8
-            Phase.REPAIR_9 -> R.drawable.sc_step_9
-            else -> 0
-        }
+        val imgId = timerUIState.phase.img
         val cdescId = when (timerUIState.phase) {
             Phase.ACTION_3 -> R.string.cd_action_3
             Phase.ACTION_3A -> R.string.cd_action_3A

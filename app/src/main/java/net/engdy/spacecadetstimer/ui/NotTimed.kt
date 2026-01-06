@@ -66,10 +66,7 @@ fun NotTimed(
         val currentPhase = timerViewModel.uiState.collectAsState().value.phase
 
         Image(
-            painterResource(if (currentPhase == Phase.PREPARE_2)
-                R.drawable.sc_step_2
-            else
-                R.drawable.sc_step_4),
+            painterResource(currentPhase.img),
             contentDescription = null,
             modifier = Modifier
                 .align(Alignment.BottomStart)
