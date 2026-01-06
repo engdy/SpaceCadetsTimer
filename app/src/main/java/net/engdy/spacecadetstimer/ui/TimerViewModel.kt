@@ -230,12 +230,20 @@ class TimerViewModel(
         if (phase == Phase.DISCUSS_1 && uiState.value.isCommBreakdown) {
             originalDuration -= ONE_MINUTE_IN_MILLIS
         }
+        if (uiState.value.phase == Phase.TUTORIALS && uiState.value.isBackgroundPlaying) {
+            backgroundExoPlayer.seekTo(0)
+            backgroundExoPlayer.prepare()
+            backgroundExoPlayer.play()
+        }
         timer.updateDuration(originalDuration)
         _uiState.update { currentState ->
             currentState.copy(
                 phase = phase,
                 secondsLeft = (originalDuration / 1_000L).toInt(),
             )
+        }
+        if (phase == Phase.TUTORIALS && uiState.value.isBackgroundPlaying) {
+            backgroundExoPlayer.pause()
         }
     }
 
