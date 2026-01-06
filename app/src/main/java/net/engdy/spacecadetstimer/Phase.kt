@@ -1,5 +1,11 @@
 package net.engdy.spacecadetstimer
 
+/**
+ * Copyright (c) 2026 Andy Foulke. All rights reserved.
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
 enum class Phase(val img: Int, val duration: Long) {
     CONFIG(0, 0L),
     NEMESIS_START(0, 0L),

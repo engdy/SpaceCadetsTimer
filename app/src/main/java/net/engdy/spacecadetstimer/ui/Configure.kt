@@ -1,5 +1,11 @@
 package net.engdy.spacecadetstimer.ui
 
+/**
+ * Copyright (c) 2026 Andy Foulke. All rights reserved.
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -8,6 +14,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -15,10 +22,8 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.em
 import net.engdy.spacecadetstimer.Phase
 import net.engdy.spacecadetstimer.R
 
@@ -35,20 +40,18 @@ fun Configure(
     ) {
         Text(
             text = stringResource(R.string.configuration),
-            fontSize = 12.em,
-            color = Color.White
+            style = MaterialTheme.typography.titleLarge
         )
         Spacer(modifier = Modifier.height(20.dp))
         Row(
             modifier = Modifier
-                .padding(bottom = 16.dp),
+                .padding(bottom = 10.dp),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
             Text(
                 text = stringResource(R.string.how_many_players),
-                fontSize = 6.em,
-                color = Color.White,
+                style = MaterialTheme.typography.titleMedium,
                 modifier = Modifier.padding(end = 10.dp)
             )
             val playerCount = timerUIState.playerCount
@@ -63,21 +66,19 @@ fun Configure(
                     stringResource(R.string.button_5)
                 else
                     stringResource(R.string.button_3_4),
-                fontSize = 6.em,
-                color = Color.White,
+                style = MaterialTheme.typography.titleMedium,
                 modifier = Modifier.padding(start = 10.dp)
             )
         }
         Row(
             modifier = Modifier
-                .padding(bottom = 16.dp),
+                .padding(bottom = 10.dp),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
             Text(
                 text = stringResource(R.string.using_science),
-                fontSize = 6.em,
-                color = Color.White,
+                style = MaterialTheme.typography.titleMedium,
                 modifier = Modifier.padding(end = 10.dp)
             )
             val science = timerUIState.usingScience
@@ -89,22 +90,48 @@ fun Configure(
             )
             Text(
                 text = if (science) stringResource(R.string.button_yes) else stringResource(R.string.button_no),
-                fontSize = 6.em,
-                color = Color.White,
+                style = MaterialTheme.typography.titleMedium,
+                modifier = Modifier.padding(start = 10.dp)
+            )
+        }
+        Row(
+            modifier = Modifier
+                .padding(bottom = 10.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
+            Text(
+                text = stringResource(R.string.play_background),
+                style = MaterialTheme.typography.titleMedium,
+                modifier = Modifier.padding(end = 10.dp)
+            )
+            val background = timerUIState.isBackgroundPlaying
+            Switch(
+                checked = background,
+                onCheckedChange = {
+                    timerViewModel.setBackgroundPlaying(!background)
+                }
+            )
+            Text(
+                text = if (background) stringResource(R.string.button_yes) else stringResource(R.string.button_no),
+                style = MaterialTheme.typography.titleMedium,
                 modifier = Modifier.padding(start = 10.dp)
             )
         }
         Button(
+            shape = MaterialTheme.shapes.small,
             onClick = {
                 timerViewModel.setPhase(Phase.NEMESIS_START)
             }
         ) {
-            Text(text = stringResource(R.string.button_next))
+            Text(
+                text = stringResource(R.string.button_next),
+                style = MaterialTheme.typography.titleSmall
+            )
         }
         Text(
             text = stringResource(R.string.science_expansion),
-            fontSize = 3.em,
-            color = Color.White
+            style = MaterialTheme.typography.bodyMedium
         )
     }
 }

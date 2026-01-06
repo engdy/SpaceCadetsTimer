@@ -1,5 +1,11 @@
 package net.engdy.spacecadetstimer.ui
 
+/**
+ * Copyright (c) 2026 Andy Foulke. All rights reserved.
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -9,18 +15,16 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.em
 import net.engdy.spacecadetstimer.Phase
 import net.engdy.spacecadetstimer.R
 
@@ -40,15 +44,19 @@ fun NotTimed(
             Spacer(modifier = Modifier.fillMaxWidth(0.1f))
             Text(
                 text = stringResource(R.string.not_timed),
-                fontSize = 16.em,
-                fontWeight = FontWeight.Bold,
-                color = Color.White
+                style = MaterialTheme.typography.titleLarge
             )
             Spacer(modifier = Modifier.fillMaxWidth(0.1f))
-            Button(onClick = {
-                timerViewModel.nextPhase()
-            }) {
-                Text(stringResource(R.string.button_next))
+            Button(
+                shape = MaterialTheme.shapes.small,
+                onClick = {
+                    timerViewModel.nextPhase()
+                }
+            ) {
+                Text(
+                    stringResource(R.string.button_next),
+                    style = MaterialTheme.typography.titleSmall
+                )
             }
         }
     }

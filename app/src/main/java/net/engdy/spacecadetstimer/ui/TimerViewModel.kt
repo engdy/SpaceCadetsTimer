@@ -1,22 +1,34 @@
 package net.engdy.spacecadetstimer.ui
 
+/**
+ * Copyright (c) 2026 Andy Foulke. All rights reserved.
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
 import android.content.Context
 import android.net.Uri
 import android.util.Log
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.liveData
+import androidx.lifecycle.viewModelScope
 import androidx.media3.common.MediaItem
 import androidx.media3.exoplayer.ExoPlayer
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 import net.engdy.spacecadetstimer.Phase
 import net.engdy.spacecadetstimer.SHGTimer
+import net.engdy.spacecadetstimer.data.UserPreferences
+import net.engdy.spacecadetstimer.data.UserPreferencesRepository
 
 class TimerViewModel(
     duration: Long,
     val finalTickingDuration: Long = TEN_SECONDS_IN_MILLIS,
-    context: Context
+    context: Context,
+    val userPreferencesRepository: UserPreferencesRepository
 ) : ViewModel() {
     private var originalDuration = duration
     private val _uiState = MutableStateFlow(TimerUIState(secondsLeft = (duration / 1_000L).toInt()))
@@ -39,6 +51,14 @@ class TimerViewModel(
     val buzzerExoPlayer: ExoPlayer
         get() = _buzzerExoPlayer
 
+    private var _backgroundExoPlayer: ExoPlayer = ExoPlayer.Builder(context).build()
+    val backgroundExoPlayer: ExoPlayer
+        get() = _backgroundExoPlayer
+
+    val initialSetupEvent = liveData {
+        emit(userPreferencesRepository.fetchInitialPreferences())
+    }
+
     init {
         val tickingUri = Uri.parse("android.resource://net.engdy.spacecadetstimer/raw/ticking")
         val tickingMediaItem: MediaItem = MediaItem.fromUri(tickingUri)
@@ -51,6 +71,28 @@ class TimerViewModel(
         buzzerExoPlayer.setMediaItem(buzzerMediaItem)
         buzzerExoPlayer.repeatMode = ExoPlayer.REPEAT_MODE_OFF
         buzzerExoPlayer.prepare()
+
+        val backgroundUri = Uri.parse("android.resource://net.engdy.spacecadetstimer/raw/sc_background")
+        val backgroundMediaItem: MediaItem = MediaItem.fromUri(backgroundUri)
+        backgroundExoPlayer.setMediaItem(backgroundMediaItem)
+        backgroundExoPlayer.repeatMode = ExoPlayer.REPEAT_MODE_ONE
+        backgroundExoPlayer.prepare()
+    }
+
+    fun setPrefs(prefs: UserPreferences) {
+        _uiState.update { currentState ->
+            currentState.copy(
+                playerCount = prefs.numPlayers,
+                isBackgroundPlaying = prefs.playBackground,
+                usingScience = prefs.usingScience
+            )
+        }
+        if (prefs.playBackground) {
+            backgroundExoPlayer.seekTo(0)
+            backgroundExoPlayer.play()
+        } else {
+            backgroundExoPlayer.pause()
+        }
     }
 
     private fun resetSounds() {
@@ -137,6 +179,9 @@ class TimerViewModel(
                 playerCount = count
             )
         }
+        viewModelScope.launch {
+            userPreferencesRepository.updateNumPlayers(count)
+        }
     }
 
     fun startOver() {
@@ -157,6 +202,26 @@ class TimerViewModel(
             currentState.copy(
                 usingScience = usingScience
             )
+        }
+        viewModelScope.launch {
+            userPreferencesRepository.updateUsingScience(usingScience)
+        }
+    }
+
+    fun setBackgroundPlaying(isBackgroundPlaying: Boolean) {
+        _uiState.update { currentState ->
+            currentState.copy(
+                isBackgroundPlaying = isBackgroundPlaying
+            )
+        }
+        if (isBackgroundPlaying) {
+            backgroundExoPlayer.seekTo(0)
+            backgroundExoPlayer.play()
+        } else {
+            backgroundExoPlayer.pause()
+        }
+        viewModelScope.launch {
+            userPreferencesRepository.updatePlayBackground(isBackgroundPlaying)
         }
     }
 
@@ -293,6 +358,10 @@ class TimerViewModel(
                 secondsLeft = (originalDuration / 1_000L).toInt()
             )
         }
+    }
+
+    fun addDuration(duration: Long) {
+        timer.addDuration(duration)
     }
 
     fun secondsToString(seconds: Int): String {

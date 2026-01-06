@@ -1,6 +1,13 @@
 package net.engdy.spacecadetstimer
 
+/**
+ * Copyright (c) 2026 Andy Foulke. All rights reserved.
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
 import android.app.Activity
+import android.content.Context
 import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.util.Log
@@ -19,6 +26,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -34,6 +42,10 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.preferencesDataStore
+import net.engdy.spacecadetstimer.data.UserPreferencesRepository
 import net.engdy.spacecadetstimer.ui.Configure
 import net.engdy.spacecadetstimer.ui.Discuss
 import net.engdy.spacecadetstimer.ui.Nemesis
@@ -41,13 +53,17 @@ import net.engdy.spacecadetstimer.ui.NotTimed
 import net.engdy.spacecadetstimer.ui.Timer30
 import net.engdy.spacecadetstimer.ui.TimerViewModel
 import net.engdy.spacecadetstimer.ui.Tutorials
-import net.engdy.spacecadetstimer.ui.theme.SpaceCadetsTimerTheme
+import net.engdy.spacecadetstimer.ui.theme.AppTheme
+
+private const val USER_PREFERENCES_NAME = "user_preferences"
+private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(
+    name = USER_PREFERENCES_NAME
+)
 
 class SpaceCadetsActivity : ComponentActivity() {
     private lateinit var timerViewModel: TimerViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        Log.d(TAG, "onCreate()")
         enableEdgeToEdge()
         super.onCreate(savedInstanceState)
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
@@ -56,11 +72,15 @@ class SpaceCadetsActivity : ComponentActivity() {
         timerViewModel = TimerViewModel(
             duration = FIVE_MINUTES_IN_MILLIS,
             finalTickingDuration = TEN_SECONDS_IN_MILLIS,
-            this
+            this,
+            userPreferencesRepository = UserPreferencesRepository(dataStore)
         )
+        timerViewModel.initialSetupEvent.observe(this) { initialSetupEvent ->
+            timerViewModel.setPrefs(initialSetupEvent)
+        }
 
         setContent {
-            SpaceCadetsTimerTheme {
+            AppTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     SpaceCadets(
                         modifier = Modifier.padding(innerPadding),
@@ -72,7 +92,6 @@ class SpaceCadetsActivity : ComponentActivity() {
     }
 
     companion object {
-        val TAG = SpaceCadetsActivity::class.simpleName
         private const val FIVE_MINUTES_IN_MILLIS = 300_000L
         private const val TEN_SECONDS_IN_MILLIS = 10_000L
     }
@@ -117,7 +136,7 @@ fun SpaceCadets(
     ) {
         Image(
             painterResource(imgId),
-            contentDescription = null,
+            contentDescription = stringResource(R.string.box_top),
             modifier = Modifier.matchParentSize(),
             contentScale = ContentScale.Crop,
         )
@@ -132,27 +151,45 @@ fun SpaceCadets(
                     && timerUiState.phase != Phase.TUTORIALS
         Button(
             enabled = buttonsEnabled,
+            shape = MaterialTheme.shapes.small,
             onClick = {
+                Log.d("SCA", "Clicked restart")
                 timerViewModel.startOver()
-            }
+            },
+            modifier = Modifier.padding(end = 10.dp)
         ) {
-            Text(stringResource(R.string.button_restart))
+            Text(
+                stringResource(R.string.button_restart),
+                style = MaterialTheme.typography.titleSmall
+            )
         }
         Button(
             enabled = buttonsEnabled,
+            shape = MaterialTheme.shapes.small,
             onClick = {
+                Log.d("SCA", "Clicked prev")
                 timerViewModel.prevPhase()
-            }
+            },
+            modifier = Modifier.padding(end = 10.dp)
         ) {
-            Text(stringResource(R.string.button_prev))
+            Text(
+                stringResource(R.string.button_prev),
+                style = MaterialTheme.typography.titleSmall
+            )
         }
         Button(
             enabled = buttonsEnabled,
+            shape = MaterialTheme.shapes.small,
             onClick = {
+                Log.d("SCA", "Clicked next")
                 timerViewModel.nextPhase()
-            }
+            },
+            modifier = Modifier.padding(end = 10.dp)
         ) {
-            Text(stringResource(R.string.button_next))
+            Text(
+                stringResource(R.string.button_next),
+                style = MaterialTheme.typography.titleSmall
+            )
         }
     }
     when (timerUiState.phase) {

@@ -1,5 +1,11 @@
 package net.engdy.spacecadetstimer.ui
 
+/**
+ * Copyright (c) 2026 Andy Foulke. All rights reserved.
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
 import net.engdy.spacecadetstimer.Phase
 
 data class TimerUIState(

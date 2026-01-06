@@ -1,3 +1,9 @@
+<!--
+  ~ Copyright (c) 2026 Andy Foulke. All rights reserved.
+  ~ This source code is licensed under the MIT license found in the
+  ~ LICENSE file in the root directory of this source tree.
+  -->
+
 <resources>
     <string name="app_name">Space Cadets Timer</string>
 
@@ -15,17 +21,29 @@
     <string name="button_restart">Restart</string>
     <string name="button_pause">Pause</string>
     <string name="not_timed">Not Timed</string>
+    <string name="box_top">Space Cadets box top</string>
 
     <!-- Configuration -->
     <string name="configuration">Configuration</string>
     <string name="how_many_players">How many players?</string>
     <string name="using_science">Using SCIENCE* STATION?</string>
     <string name="science_expansion">*from the Resistance is Mostly Futile expansion</string>
+    <string name="play_background">Play background music?</string>
 
-    <!-- Nemesis Start -->
+    <!-- Nemesis -->
     <string name="select_starting_point">Select the starting point for the Nemesis Marker:</string>
     <string name="update_nemesis">Update the Nemesis Marker</string>
     <string name="view_tutorials">View Tutorials</string>
+    <string name="cd_nemesis_not_set">Nemesis not set</string>
+    <string name="cd_nemesis_neg2">Nemesis -2</string>
+    <string name="cd_nemesis_neg1">Nemesis -1</string>
+    <string name="cd_nemesis_0">Nemesis 0</string>
+    <string name="cd_nemesis_1">Nemesis 1</string>
+    <string name="cd_nemesis_2">Nemesis 2</string>
+    <string name="cd_nemesis_3">Nemesis 3</string>
+    <string name="cd_nemesis_4">Nemesis 4</string>
+    <string name="cd_nemesis_5">Nemesis 5</string>
+    <string name="cd_nemesis_6">Nemesis 6</string>
 
     <!-- Tutorials -->
     <string name="tutorials_title">Tutorials</string>
@@ -41,4 +59,26 @@
 
     <!-- Discuss Phase -->
     <string name="button_comm_breakdown">Comm Breakdown</string>
+    <string name="cd_discuss">Discuss step</string>
+
+    <!-- Action Phase -->
+    <string name="cd_action_3">Action phase 3</string>
+    <string name="cd_action_3A">Action phase 3A</string>
+    <string name="cd_action_3B">Action phase 3B</string>
+
+    <!-- Science Phase -->
+    <string name="cd_science">Science phase</string>
+
+    <!-- Tractor Phase -->
+    <string name="cd_tractor">Tractor phase</string>
+
+    <!-- Fire Weapons Phase -->
+    <string name="cd_fire_weapons">Fire weapons phase</string>
+
+    <!-- Repair Phase -->
+    <string name="cd_repair">Repair phase</string>
+
+    <!-- Jump -->
+    <string name="button_add_30">+30 sec</string>
+    <string name="cd_jump">Jump phase</string>
 </resources>
